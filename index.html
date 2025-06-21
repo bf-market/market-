@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediaSphere - Présentation de produits multimédia</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --success: #4cc9f0;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --bg-day: #ffffff;
+            --text-day: #333333;
+            --bg-night: #1a1a2e;
+            --text-night: #f0f0f0;
+            --card-bg-day: #f8f9fa;
+            --card-bg-night: #16213e;
+            --transition: all 0.4s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-day);
+            color: var(--text-day);
+            transition: var(--transition);
+        }
+
+        body.night-mode {
+            background-color: var(--bg-night);
+            color: var(--text-night);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            color: white;
+            font-weight: 700;
+        }
+
+        .logo i {
+            font-size: 2rem;
+            color: var(--success);
+        }
+
+        /* Search Bar */
+        .search-container {
+            position: relative;
+            width: 50%;
+            max-width: 600px;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 12px 20px;
+            border-radius: 50px;
+            border: none;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .search-bar:focus {
+            outline: none;
+            box-shadow: 0 4px 20px rgba(67, 97, 238, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .search-options {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            margin-top: 10px;
+            padding: 15px;
+            display: none;
+            z-index: 100;
+        }
+
+        .search-options.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .search-options h3 {
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .filter-btn {
+            padding: 8px 15px;
+            background: #f0f4ff;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* User Menu */
+        .user-menu {
+            position: relative;
+        }
+
+        .menu-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            right: 0;
+            top: 100%;
+            background: white;
+            width: 250px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            margin-top: 15px;
+            padding: 15px 0;
+            display: none;
+            z-index: 100;
+        }
+
+        .dropdown-menu.active {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        .menu-item {
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .menu-item:hover {
+            background: #f8f9fa;
+        }
+
+        .menu-item i {
+            width: 20px;
+            text-align: center;
+        }
+
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 20px;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--primary);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        /* Quote Section */
+        .quote-section {
+            text-align: center;
+            padding: 30px 0;
+            background: linear-gradient(135deg, #f5f7fa, #e4e7f1);
+            margin: 20px 0;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        body.night-mode .quote-section {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+        }
+
+        .quote {
+            font-style: italic;
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+            color: var(--primary);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .quote-author {
+            margin-top: 15px;
+            font-weight: 600;
+            color: var(--secondary);
+        }
+
+        /* Main Content */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .content-section {
+            background: var(--card-bg-day);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        body.night-mode .content-section {
+            background: var(--card-bg-night);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        body.night-mode .product-card {
+            background: #0f3460;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(67, 97, 238, 0.2);
+        }
+
+        .product-media {
+            height: 200px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .product-media img, .product-media video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-media img {
+            transform: scale(1.05);
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .product-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        body.night-mode .product-meta {
+            color: #aaa;
+        }
+
+        .product-price {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        /* TV Section */
+        .tv-container {
+            position: relative;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            border-radius: 15px;
+            overflow: hidden;
+            background: #000;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .tv-stream {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .tv-controls {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .tv-btn {
+            flex: 1;
+            padding: 10px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .tv-btn:hover {
+            background: var(--secondary);
+        }
+
+        /* QR Code Section */
+        .qr-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+            border-radius: 15px;
+            margin-top: 25px;
+        }
+
+        body.night-mode .qr-section {
+            background: linear-gradient(135deg, #0f3460, #1a1a2e);
+        }
+
+        #qrcode {
+            margin: 20px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+        }
+
+        .qr-info {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        body.night-mode .qr-info {
+            color: #ccc;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .search-container {
+                width: 40%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .logo, .search-container, .user-menu {
+                width: 100%;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header avec barre de recherche et menu utilisateur -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-globe-americas"></i>
+                    <h1>MediaSphere</h1>
+                </div>
+                
+                <div class="search-container">
+                    <input type="text" class="search-bar" id="searchInput" placeholder="Rechercher des produits...">
+                    <div class="search-options" id="searchOptions">
+                        <h3>Filtrer par :</h3>
+                        <div class="filter-group">
+                            <button class="filter-btn active" data-filter="name">Nom</button>
+                            <button class="filter-btn" data-filter="price">Prix</button>
+                            <button class="filter-btn" data-filter="date">Date</button>
+                        </div>
+                        <div class="price-range">
+                            <label for="priceRange">Plage de prix : 0€ - 1000€</label>
+                            <input type="range" id="priceRange" min="0" max="1000" value="500">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="user-menu">
+                    <button class="menu-btn" id="menuBtn">
+                        <i class="fas fa-user-circle"></i>
+                        <span>Mon Compte</span>
+                    </button>
+                    <div class="dropdown-menu" id="dropdownMenu">
+                        <div class="menu-item">
+                            <i class="fas fa-user"></i>
+                            <span>Profil</span>
+                        </div>
+                        <div class="menu-item">
+                            <i class="fas fa-cog"></i>
+                            <span>Paramètres</span>
+                        </div>
+                        <div class="theme-toggle">
+                            <div>
+                                <i class="fas fa-moon"></i>
+                                <span>Mode Nuit</span>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" id="themeToggle">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="menu-item">
+                            <i class="fas fa-sign-out-alt"></i>
+                            <span>Déconnexion</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Section citation dynamique -->
+    <div class="container">
+        <div class="quote-section">
+            <p class="quote" id="dailyQuote">"L'innovation distingue un leader d'un suiveur."</p>
+            <p class="quote-author" id="quoteAuthor">- Steve Jobs</p>
+        </div>
+    </div>
+    
+    <!-- Contenu principal -->
+    <div class="container">
+        <div class="content-grid">
+            <div class="main-content">
+                <div class="content-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-box-open"></i>
+                        Derniers Produits
+                    </h2>
+                    <div class="products-grid" id="productsGrid">
+                        <!-- Les produits seront générés dynamiquement en JS -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sidebar">
+                <div class="content-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-tv"></i>
+                        Live TV
+                    </h2>
+                    <div class="tv-container">
+                        <iframe class="tv-stream" src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    </div>
+                    <div class="tv-controls">
+                        <button class="tv-btn" id="channel1">Chaîne Info</button>
+                        <button class="tv-btn" id="channel2">Chaîne Tech</button>
+                        <button class="tv-btn" id="channel3">Chaîne Musique</button>
+                    </div>
+                </div>
+                
+                <div class="content-section">
+                    <h2 class="section-title">
+                        <i class="fas fa-external-link-alt"></i>
+                        Contenu Déporté
+                    </h2>
+                    <div class="external-content">
+                        <p>Accédez à nos partenaires pour plus d'informations :</p>
+                        <div class="external-links">
+                            <a href="#" class="external-link">
+                                <i class="fas fa-newspaper"></i> Actualités Tech
+                            </a>
+                            <a href="#" class="external-link">
+                                <i class="fas fa-blog"></i> Blog Produits
+                            </a>
+                            <a href="#" class="external-link">
+                                <i class="fas fa-comments"></i> Forum Communauté
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="qr-section">
+                    <h3>Contactez-nous via QR Code</h3>
+                    <div id="qrcode"></div>
+                    <p class="qr-info">Scannez ce code pour enregistrer nos coordonnées directement dans votre téléphone</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>MediaSphere</h3>
+                    <p>La plateforme ultime pour découvrir, explorer et acheter les derniers produits multimédias.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Navigation</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">A
