@@ -668,9 +668,8 @@
                         </div>
                     </div>
                 </div>
-                
-                <div class="qr-section">
-                    <h3>Contactez-nous via QR Code</h3>
+               
+ <div class="qr-section">                    <h3>Contactez-nous via QR Code</h3>
                     <div id="qrcode"></div>
                     <p class="qr-info">Scannez ce code pour enregistrer nos coordonnées directement dans votre téléphone</p>
                 </div>
@@ -689,4 +688,298 @@
                 <div class="footer-column">
                     <h3>Navigation</h3>
                     <ul class="footer-links">
-                        <li><a href="#">A
+                        <li><a href="#">Accueil</a></li>
+                        <li><a href="#">Produits</a></li>
+                        <li><a href="#">Catégories</a></li>
+                        <li><a href="#">Nouveautés</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Retours</a></li>
+                        <li><a href="#">Garanties</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Légal</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Conditions d'utilisation</a></li>
+                        <li><a href="#">Politique de confidentialité</a></li>
+                        <li><a href="#">Cookies</a></li>
+                        <li><a href="#">Mentions légales</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 MediaSphere. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Données des produits
+        const products = [
+            {
+                id: 1,
+                name: "Caméra 4K Ultra HD",
+                description: "Caméra professionnelle avec stabilisation d'image",
+                price: 799,
+                date: "2023-05-15",
+                type: "image",
+                media: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 2,
+                name: "Enceinte Bluetooth",
+                description: "Son surround avec basse profonde",
+                price: 199,
+                date: "2023-06-20",
+                type: "audio",
+                media: "https://images.unsplash.com/photo-1546435770-a3e426bf472b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 3,
+                name: "Drone Pro",
+                description: "Drone avec caméra 8K et suivi intelligent",
+                price: 1299,
+                date: "2023-04-10",
+                type: "video",
+                media: "https://images.unsplash.com/photo-1579829366248-204fe8413f31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 4,
+                name: "Smartphone Édition Limitée",
+                description: "Écran AMOLED 120Hz, triple caméra",
+                price: 899,
+                date: "2023-07-01",
+                type: "image",
+                media: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 5,
+                name: "Casque Réalité Virtuelle",
+                description: "Immersion totale avec suivi oculaire",
+                price: 499,
+                date: "2023-03-22",
+                type: "image",
+                media: "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+            },
+            {
+                id: 6,
+                name: "Console de Jeux Next-Gen",
+                description: "Ray tracing, 4K 120FPS, SSD ultra-rapide",
+                price: 549,
+                date: "2023-02-18",
+                type: "video",
+                media: "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+            }
+        ];
+
+        // Citations quotidiennes
+        const quotes = [
+            { text: "La technologie ne vaut que si elle rapproche les gens.", author: "Matt Mullenweg" },
+            { text: "L'innovation distingue un leader d'un suiveur.", author: "Steve Jobs" },
+            { text: "Le meilleur moyen de prédire l'avenir est de l'inventer.", author: "Alan Kay" },
+            { text: "La simplicité est la sophistication suprême.", author: "Léonard de Vinci" },
+            { text: "Votre temps est limité, ne le gâchez pas en menant une existence qui n'est pas la vôtre.", author: "Steve Jobs" },
+            { text: "La créativité, c'est l'intelligence qui s'amuse.", author: "Albert Einstein" }
+        ];
+
+        // Chaînes TV
+        const tvChannels = {
+            channel1: "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1",
+            channel2: "https://www.youtube.com/embed/Mj0IOXwl8Lo?autoplay=1&mute=1",
+            channel3: "https://www.youtube.com/embed/HyHNuVaZJ-k?autoplay=1&mute=1"
+        };
+
+        // Initialisation du site
+        document.addEventListener('DOMContentLoaded', function() {
+            // Générer les produits
+            renderProducts();
+            
+            // Gestion du menu utilisateur
+            const menuBtn = document.getElementById('menuBtn');
+            const dropdownMenu = document.getElementById('dropdownMenu');
+            
+            menuBtn.addEventListener('click', function() {
+                dropdownMenu.classList.toggle('active');
+            });
+            
+            // Fermer le menu en cliquant en dehors
+            document.addEventListener('click', function(event) {
+                if (!menuBtn.contains(event.target) {
+                    dropdownMenu.classList.remove('active');
+                }
+            });
+            
+            // Gestion de la recherche
+            const searchInput = document.getElementById('searchInput');
+            const searchOptions = document.getElementById('searchOptions');
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            
+            searchInput.addEventListener('focus', function() {
+                searchOptions.classList.add('active');
+            });
+            
+            searchInput.addEventListener('blur', function() {
+                setTimeout(() => {
+                    searchOptions.classList.remove('active');
+                }, 200);
+            });
+            
+            // Gestion des filtres
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // Recherche dynamique
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+                
+                const filteredProducts = products.filter(product => {
+                    if (activeFilter === 'name') {
+                        return product.name.toLowerCase().includes(searchTerm);
+                    } else if (activeFilter === 'price') {
+                        return product.price.toString().includes(searchTerm);
+                    } else if (activeFilter === 'date') {
+                        return product.date.includes(searchTerm);
+                    }
+                    return true;
+                });
+                
+                renderProducts(filteredProducts);
+            });
+            
+            // Gestion du mode nuit/jour
+            const themeToggle = document.getElementById('themeToggle');
+            const savedTheme = localStorage.getItem('theme');
+            
+            if (savedTheme === 'night') {
+                document.body.classList.add('night-mode');
+                themeToggle.checked = true;
+            }
+            
+            themeToggle.addEventListener('change', function() {
+                if (this.checked) {
+                    document.body.classList.add('night-mode');
+                    localStorage.setItem('theme', 'night');
+                } else {
+                    document.body.classList.remove('night-mode');
+                    localStorage.setItem('theme', 'day');
+                }
+            });
+            
+            // Gestion de la TV
+            const tvStream = document.querySelector('.tv-stream');
+            const tvButtons = document.querySelectorAll('.tv-btn');
+            
+            tvButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const channelId = this.id;
+                    tvStream.src = tvChannels[channelId];
+                    
+                    // Mettre à jour le bouton actif
+                    tvButtons.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // Générer le QR Code
+            const qrElement = document.getElementById('qrcode');
+            const qr = new QRCode(qrElement, {
+                text: "https://www.example.com/contact\nTél: +33 1 23 45 67 89\nEmail: contact@mediasphere.fr",
+                width: 150,
+                height: 150,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            });
+            
+            // Mise à jour de la citation quotidienne
+            updateDailyQuote();
+        });
+        
+        // Fonction pour afficher les produits
+        function renderProducts(productsToRender = products) {
+            const productsGrid = document.getElementById('productsGrid');
+            productsGrid.innerHTML = '';
+            
+            productsToRender.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                
+                let mediaElement = '';
+                if (product.type === 'video') {
+                    mediaElement = `
+                        <div class="product-media">
+                            <video controls>
+                                <source src="${product.media}" type="video/mp4">
+                            </video>
+                        </div>
+                    `;
+                } else {
+                    mediaElement = `
+                        <div class="product-media">
+                            <img src="${product.media}" alt="${product.name}">
+                        </div>
+                    `;
+                }
+                
+                productCard.innerHTML = `
+                    ${mediaElement}
+                    <div class="product-info">
+                        <h3 class="product-title">${product.name}</h3>
+                        <p>${product.description}</p>
+                        <div class="product-meta">
+                            <span>${new Date(product.date).toLocaleDateString('fr-FR')}</span>
+                            <span class="product-price">${product.price}€</span>
+                        </div>
+                    </div>
+                `;
+                
+                productsGrid.appendChild(productCard);
+            });
+        }
+        
+        // Fonction pour mettre à jour la citation quotidienne
+        function updateDailyQuote() {
+            const lastQuoteDate = localStorage.getItem('lastQuoteDate');
+            const today = new Date().toDateString();
+            const quoteElement = document.getElementById('dailyQuote');
+            const authorElement = document.getElementById('quoteAuthor');
+            
+            // Changer la citation seulement si c'est un nouveau jour
+            if (lastQuoteDate !== today) {
+                const randomIndex = Math.floor(Math.random() * quotes.length);
+                const selectedQuote = quotes[randomIndex];
+                
+                quoteElement.textContent = `"${selectedQuote.text}"`;
+                authorElement.textContent = `- ${selectedQuote.author}`;
+                
+                localStorage.setItem('lastQuoteDate', today);
+                localStorage.setItem('dailyQuote', JSON.stringify(selectedQuote));
+            } else {
+                // Utiliser la citation sauvegardée
+                const savedQuote = JSON.parse(localStorage.getItem('dailyQuote'));
+                if (savedQuote) {
+                    quoteElement.textContent = `"${savedQuote.text}"`;
+                    authorElement.textContent = `- ${savedQuote.author}`;
+                }
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+                            
